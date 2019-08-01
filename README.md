@@ -1,21 +1,5 @@
-# React-Static - TypeScript Template
+# jchou-blog-ts
 
-To use this template, run `react-static create` and use the `typescript` template.
-
-## Path Aliases for Absolute Imports
-
-`react-static-typescript-plugin` supports path aliases [since v3.1](https://github.com/nozzle/react-static/pull/963#issuecomment-455596728). It has been set up in this template.
-
-```js
-// tsconfig.json
-{
-  // ...
-    "paths": {
-      "@components/*": ["src/components/*"]
-    },
-  // ...
-}
-
-// this works in your React app
-import FancyDiv from '@components/FancyDiv'
-```
+### Hello, welcome to my personal blog.
+ 
+Unfornately I will be unable to continue working on this blog in typescript due to various bugs associated with React-static typescript plugins. When these bugs are fixed, I will update my blog to typescript. For now, it will migrate to Javascript here: [jchou-blog]()
