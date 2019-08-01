@@ -1,30 +1,39 @@
-import axios from 'axios'
+import request from "graphql-request"
 import path from 'path'
-// import { Post } from './types'
 
-// Typescript support in static.config.js is not yet supported, but is coming in a future update!
+const GRAPHCMS_endpoint = "https://api-uswest.graphcms.com/v1/cjyt00rv801nc01e3fhxy6izr/master";
+
+const query =
+  `{
+  posts{
+    id
+    title
+    image {
+      handle
+    }
+    content
+  }
+}`;
 
 export default {
   entry: path.join(__dirname, 'src', 'index.tsx'),
   getRoutes: async () => {
-    const { data: posts } /* :{ data: Post[] } */ = await axios.get(
-      'https://jsonplaceholder.typicode.com/posts'
-    )
-    return [
-      {
-        path: '/blog',
+    const {
+      posts
+    } = await request(GRAPHCMS_endpoint, query);
+    return [{
+      path: '/',
+      getData: () => ({
+        posts,
+      }),
+      children: posts.map((post) => ({
+        path: `/post/${post.id}`,
+        template: 'src/pages/post',
         getData: () => ({
-          posts,
+          post,
         }),
-        children: posts.map((post /* : Post */) => ({
-          path: `/post/${post.id}`,
-          template: 'src/containers/Post',
-          getData: () => ({
-            post,
-          }),
-        })),
-      },
-    ]
+      })),
+    }, ]
   },
   plugins: [
     'react-static-plugin-typescript',
